@@ -1,0 +1,8 @@
+---
+- name: Restarting Docker Service
+  systemd:
+    daemon_reload: yes
+    name: docker 
+    state: restarted
+  listen:
+    - restart docker

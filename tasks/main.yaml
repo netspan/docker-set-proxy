@@ -1,0 +1,15 @@
+---
+- name: Creating directory /etc/systemd/system/docker.service.d/
+  file:
+    path: /etc/systemd/system/docker.service.d/
+    state: directory
+
+- name: Template file to /etc/systemd/system/docker.service.d/http-proxy.conf
+  template:
+    src: templates/http-proxy.conf.j2
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+  notify:
+    - restart docker
+
+- name: Flushing handlers
+  meta: flush_handlers
